@@ -1,0 +1,41 @@
+[project]
+name = "mac-desktop-arranger"
+version = "0.1.0"
+description = "Remember which app lives on each desktop, and which desktop lives on each monitor."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
+dependencies = [
+    "rumps>=0.4.0",
+    "pyobjc-framework-Cocoa>=10.3",
+    "pyobjc-framework-Quartz>=10.3",
+    "pyobjc-framework-ApplicationServices>=10.3",
+]
+
+[project.scripts]
+mac-desktop-arranger = "mac_desktop_arranger.__main__:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mac_desktop_arranger"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
